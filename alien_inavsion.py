@@ -10,7 +10,6 @@ class AlienInvasion:
         """Inicializar o jogo e criar recursos de jogo"""
         
         pygame.init()
-        self.clock = pygame.time.Clock()
         self.settings = Settings()
         
         self.screen = pygame.display.set_mode(
@@ -22,13 +21,9 @@ class AlienInvasion:
     def run_game(self):
         """Inicia o loop principal, main para o jogo"""
         while True:
-            
-            #
-            
             self._check_events()
             self.ship.update()
             self._update_screen()
-            self.clock.tick(60)
     
     def _check_events(self):
         # Aguarda por eventos de teclado ou mouse.
@@ -36,18 +31,25 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    # Mover a nave para a direita
-                    self.ship.moving_right = True
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = True
-                        
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False
-    
+                self._check_keyup_events(event)
+                    
+    def _check_keydown_events(self, event):
+        """Responde ao pressionamento de tecla"""
+        if event.key == pygame.K_RIGHT:
+        # Mover a nave para a direita
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+        
+    def _check_keyup_events(self, event):
+        """Responde ao soltar de teclas"""    
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+            
     def _update_screen(self):
         #Atualiza imagens da tela, e flip para nova tela
         self.screen.fill(self.settings.bg_color)

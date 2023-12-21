@@ -5,7 +5,7 @@ class Settings:
         """Início das configurações do jogo"""
         #Configurações de tela
         self.screen_width = 1200
-        self.screen_height = 800
+        self.screen_height = 750
         self.bg_color = (95, 158, 160)
         
         #Configurações da nave
