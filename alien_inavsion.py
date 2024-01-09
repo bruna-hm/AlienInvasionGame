@@ -11,6 +11,7 @@ class AlienInvasion:
         
         pygame.init()
         self.settings = Settings()
+        self.clock = pygame.time.Clock()
         
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
@@ -24,6 +25,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_screen()
+            self.clock.tick(60)
     
     def _check_events(self):
         # Aguarda por eventos de teclado ou mouse.
@@ -42,6 +44,8 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_q:
+            sys.exit()
         
     def _check_keyup_events(self, event):
         """Responde ao soltar de teclas"""    
