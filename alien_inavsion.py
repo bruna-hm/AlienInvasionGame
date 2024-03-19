@@ -2,6 +2,8 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from alien import Alien
+from bullet import Bullet
 
 class AlienInvasion:
     """Classe overall para gerenciar assets e comportamento"""
@@ -18,12 +20,17 @@ class AlienInvasion:
         pygame.display.set_caption("Invasão Alienígena!!!")
     
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+        
+        #self._create_fleet()
     
     def run_game(self):
         """Inicia o loop principal, main para o jogo"""
         while True:
             self._check_events()
             self.ship.update()
+            self._update_bullets()
             self._update_screen()
             self.clock.tick(60)
     
@@ -50,6 +57,8 @@ class AlienInvasion:
             self.ship.moving_down = True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
         
     def _check_keyup_events(self, event):
         """Responde ao soltar de teclas"""    
@@ -61,11 +70,28 @@ class AlienInvasion:
             self.ship.moving_up = False
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = False
+    
+    def _fire_bullet(self):
+        """Cria nova bala e adiciona ao grupo de balas"""
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+    
+    def _update_bullets(self):
+        """Atualiza a posição das balas e se livra de balas velhas"""
+        #Atualiza posição das balas
+        self.bullets.update()
+        for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
             
     def _update_screen(self):
         #Atualiza imagens da tela, e flip para nova tela
         self.screen.fill(self.settings.bg_color)
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         self.ship.blitme()
+        self.aliens.draw(self.screen)
         
         pygame.display.flip()
             
