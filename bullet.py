@@ -11,7 +11,7 @@ class Bullet(Sprite):
         self.color = self.settings.bullet_color
         
         #Criar um rect da bala em (0, 0) e então configurar a posição correta
-        self.rect = pygame.Rect(0, 0, self.settings.bullet_width, 
+        self.rect = pygame.Rect(300, 0, self.settings.bullet_width, 
             self.settings.bullet_height)
         self.rect.midtop = ai_game.ship.rect.midtop
         
