@@ -17,10 +17,10 @@ class Button:
         self._prep_msg(msg)
         
     def _prep_msg(self, msg):
-        self.msg.image = self.font.render(msg, True, self.text_color, self.button-color)
-        self.msg.image_rect = self.msg.image.get_rect()
+        self.msg_image = self.font.render(msg, True, self.text_color, self.button_color)
+        self.msg_image_rect = self.msg_image.get_rect()
         self.msg_image_rect.center = self.rect.center
         
-        def draw_button(self):
-            self.screenfill(self.button_color, self.rect)
-            self.screen.blit(self.msg_image, self.msg_image_rect)
+    def draw_button(self):
+        self.screen.fill(self.button_color, self.rect)
+        self.screen.blit(self.msg_image, self.msg_image_rect)
