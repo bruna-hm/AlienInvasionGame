@@ -132,10 +132,10 @@ class AlienInvasion:
         if collisions:
             for aliens in collisions.values():
                 self.stats.score += self.settings.aliens_points * len(aliens)
-            self.sb.prep_score()
+                self.sb.prep_score()
             self.sb.check_high_score()
             
-        if not self.aliens:
+        if len(self.aliens) == 0:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
@@ -202,19 +202,18 @@ class AlienInvasion:
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
             self.sb.prep_ships()
-        
-            self.bullets.empty()
-            self.aliens.empty()
-        
-            self._create_fleet()
-            self.ship.center_ship()
-        
-            sleep(0.5)
-        
         else:
             self.game_active = False
             pygame.mouse.set_visible(True)
-            
+         
+        self.bullets.empty()
+        self.aliens.empty()
+        
+        self._create_fleet()
+        self.ship.center_ship()
+        
+        sleep(0.5)
+              
     def _check_aliens_botttom(self):
         for alien in self.aliens.sprites():
             if alien.rect.bottom >= self.settings.screen_height:

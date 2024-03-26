@@ -9,7 +9,7 @@ class Settings:
         self.bg_color = (95, 158, 160)
         
         #Bullet settings
-        self.bullet_width = 100
+        self.bullet_width = 500
         self.bullet_height = 10
         self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 3
@@ -40,6 +40,6 @@ class Settings:
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
         
-        self.alien_points = int(self.alien_points * self.score_scale)
-        print(self.alien_points)
+        self.alien_points = int(self.aliens_points * self.score_scale)
+        print(self.aliens_points)
         
