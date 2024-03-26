@@ -66,19 +66,21 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.game_active:
             self.settings.initialize_dynamic_settings()
+            
+            pygame.mouse.set_visible(False)
+            
             self.stats.reset_stats()
+            self.game_active = True
+            
             self.sb.prep_score()
             self.sb.prep_level()
             self.sb.prep_ships()
-            self.game_active = True
             
             self.bullets.empty()
             self.aliens.empty()
             
             self._create_fleet()
             self.ship.center_ship()
-            
-            pygame.mouse.set_visible(False)
                     
     def _check_keydown_events(self, event):
         """Responde ao pressionamento de tecla"""
