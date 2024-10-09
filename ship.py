@@ -11,7 +11,7 @@ class Ship(Sprite):
        self.screen_rect = ai_game.screen.get_rect()
        
        #Carrega imagem da nava e toma seu rect
-       self.image = pygame.image.load('AlienInvasionGame\images\SpaceShip.BMP')
+       self.image = pygame.image.load('./images/SpaceShip.bmp')
        self.rect = self.image.get_rect()
        
        #Começa toda nova nave no centro da tela
